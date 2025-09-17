@@ -14,7 +14,7 @@ The pool, thanks to the Apache library, supports most common pool features:
 
 # Requirements
 
-Java 1.8
+Java 21
 
 # Maven dependency
 
@@ -29,8 +29,8 @@ eg.:
     <version>1.4.0</version>
 </dependency>
 ```
- 
- 
+
+
 # How to use the connection pool?
 
 The `SmtpConnectionPool` creates a JavaMail [`Transport`](https://javamail.java.net/nonav/docs/api/javax/mail/Transport.html) using a `SmtpConnectionFactory`.
@@ -38,7 +38,7 @@ The `SmtpConnectionPool` creates a JavaMail [`Transport`](https://javamail.java.
 ## Smtp Connection Factory
 
 The `SmtpConnectionFactory` can be created using different ways.
- 
+
 **If you already have a configured [`Session`](https://javamail.java.net/nonav/docs/api/javax/mail/Session.html)**
 ```java
 SmtpConnectionFactory factory = SmtpConnectionFactories.newSmtpFactory(aSession);
@@ -50,7 +50,7 @@ JavaMail will retrieve the protocol, host, username... from the `Session`.
 ```java
 SmtpConnectionFactory factory = SmtpConnectionFactoryBuilder.newSmtpBuilder()
                 .session(aSession)
-                .protocol("smtp") 
+                .protocol("smtp")
                 .host("mailer")
                 .port(2525)
                 .username("foo")
@@ -68,10 +68,10 @@ new SmtpConnectionFactory(aSession, aTransportStrategy, aConnectionStrategy);
 
 Where:
 
-- `TransportStrategy` allows to configure how the 
+- `TransportStrategy` allows to configure how the
 [transport is got](https://javamail.java.net/nonav/docs/api/javax/mail/Session.html#getTransport%28%29) (default, protocol, url, provider)
 - `ConnectionStrategy` allows to configure [how to connect](https://javamail.java.net/nonav/docs/api/javax/mail/Service.html#connect%28%29)  (default, username/password...)
- 
+
 
 ## Smtp Connection Pool
 
@@ -99,7 +99,7 @@ smtpConnectionPool.close();
 
 # How to configure the pool?
 
-Configuration is held by the Pool code, see the [Commons Pool Javadoc](https://commons.apache.org/proper/commons-pool/api-2.3/index.html). 
+Configuration is held by the Pool code, see the [Commons Pool Javadoc](https://commons.apache.org/proper/commons-pool/api-2.3/index.html).
 
 Example:
 ```java
@@ -112,4 +112,3 @@ config.setMaxTotal(2);
 SmtpConnectionPool smtpConnectionPool = new SmtpConnectionPool(SmtpConnectionFactoryBuilder.newSmtpBuilder().build(), config);
 
 ```
-
